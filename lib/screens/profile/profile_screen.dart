@@ -315,10 +315,13 @@ class ProfileScreen extends StatelessWidget {
               child: Text(state.msg),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.blue,
-            ),
+          return Column(
+            children: [
+              context.addSpacer(multiply: 0.3),
+              const CircularProgressIndicator(
+                color: Color(0xff7822d2),
+              ),
+            ],
           );
         },
       );

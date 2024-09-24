@@ -29,7 +29,7 @@ class UserProjectScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                context.addSpacer(),
+                //context.addSpacer(),
                 Text(
                   language.isArabic ? 'مشاريعي' : 'My project',
                   style: const TextStyle(

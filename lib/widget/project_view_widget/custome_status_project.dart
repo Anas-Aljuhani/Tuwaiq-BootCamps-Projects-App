@@ -30,8 +30,9 @@ class CustomeCampStatusProject extends StatelessWidget {
           style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.w500),
         ),
         Container(
-          width: widthContainer,
-          height: heightContainer,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          constraints: BoxConstraints(
+              minHeight: heightContainer, minWidth: widthContainer),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: continaerColor,
@@ -46,7 +47,7 @@ class CustomeCampStatusProject extends StatelessWidget {
           ),
           child: Center(
               child: Text(
-            '${textContent.substring(0, textContent.length > 9 ? 9 : textContent.length)}...',
+            textContent.substring(0, textContent.length),
             style: TextStyle(fontSize: sizeText, color: Colors.black),
           )),
         ),
