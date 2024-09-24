@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
@@ -24,6 +28,10 @@ class ProfileScreen extends StatelessWidget {
     return Builder(builder: (context) {
       final language = languageLocaitor.get<LanguageLayer>();
       context.read<ProfileCubit>().getProfile();
+      String rating = '0';
+      () async {
+        rating = await context.read<ProfileCubit>().showProjectRating();
+      };
       return BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state is ShowProfileState) {
@@ -36,8 +44,21 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          IconButton(
+                              onPressed: () async {
+                                await Clipboard.setData(
+                                    ClipboardData(text: state.profileModel.id));
+
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('ID Copied to clipboard'),
+                                  backgroundColor: Color(0xff7822d2),
+                                ));
+                              },
+                              icon: const Icon(FontAwesome.copy)),
                           IconButton(
                             onPressed: () {
                               context.read<ProfileCubit>().translate();
@@ -46,10 +67,6 @@ class ProfileScreen extends StatelessWidget {
                             color:
                                 language.isArabic ? Colors.blue : Colors.grey,
                           ),
-                          Text(
-                            language.isArabic ? 'عربي' : 'English',
-                            textDirection: TextDirection.rtl,
-                          )
                         ],
                       ),
                     ),
@@ -117,7 +134,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       CustomeStatusProfile(
                         textTitle: language.isArabic ? 'التقييم' : 'Rating',
-                        rating: '0',
+                        rating: rating,
                         icon: Icon(
                           Icons.star,
                           size: context.getHeight(multiply: 0.05),
@@ -206,9 +223,9 @@ class ProfileScreen extends StatelessWidget {
                         CustomeListTileProfile(
                           onTap: () {},
                           iconListTile: Icon(
-                            Icons.notifications_none_outlined,
+                            LineAwesome.user_astronaut_solid,
                             size: context.getHeight(multiply: 0.035),
-                            color: const Color(0x889B37FF).withOpacity(0.70),
+                            color: const Color(0xff7822d3),
                           ),
                           colorText: Colors.black,
                           text: language.isArabic
@@ -222,9 +239,9 @@ class ProfileScreen extends StatelessWidget {
                         CustomeListTileProfile(
                           onTap: () {},
                           iconListTile: Icon(
-                            Icons.chrome_reader_mode,
+                            Icons.info_outline,
                             size: context.getHeight(multiply: 0.035),
-                            color: const Color(0x889B37FF).withOpacity(0.70),
+                            color: const Color(0xff7822d3),
                           ),
                           colorText: Colors.black,
                           text: language.isArabic ? 'عن التطبيق' : 'About App',
@@ -242,7 +259,7 @@ class ProfileScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
                                 content: Text(
-                                  "you are not admin",
+                                  "You don't have acsess",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -252,13 +269,13 @@ class ProfileScreen extends StatelessWidget {
                             }
                           },
                           iconListTile: Icon(
-                            Icons.chrome_reader_mode,
+                            LineAwesome.user_check_solid,
                             size: context.getHeight(multiply: 0.035),
-                            color: const Color(0x889B37FF).withOpacity(0.70),
+                            color: const Color(0xff7822d3),
                           ),
                           colorText: Colors.black,
                           text:
-                              language.isArabic ? 'اضافة مشروع' : 'Add project',
+                              language.isArabic ? 'ادارة مشروع' : 'Manage project',
                           isArabic: language.isArabic,
                         ),
                       ],
