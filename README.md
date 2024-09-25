@@ -120,13 +120,12 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 ![alt text](assets/readme/image-8.png)
 ![alt text](assets/readme/image-9.png)
 ![alt text](assets/readme/image.png)
-![alt text](assets/readme/image-1.png)
-![alt text](assets/readme/image-2.png)
-![alt text](assets/readme/image-3.png)
-![alt text](assets/readme/image-4.png)
-![alt text](assets/readme/image-5.png)
-![alt text](assets/readme/image-6.png)
-
+![alt text](assets/readme/all.png)
+![alt text](assets/readme/my.png)
+![alt text](assets/readme/Search_Project_Img.png)
+![alt text](assets/readme/profile.png)
+![alt text](assets/readme/info.png)
+![alt text](assets/readme/rate.png)
 
 ### Demo Video
 
