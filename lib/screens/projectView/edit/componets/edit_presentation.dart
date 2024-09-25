@@ -125,8 +125,8 @@ class EditPresentation extends StatelessWidget {
                             color: Color(0xff969696),
                           ))),
               CustomButton(
-                englishTitle: 'Edit Presentation',
-                arabicTitle: 'تعديل العرض',
+                englishTitle: 'Edit',
+                arabicTitle: 'تعديل',
                 onPressed: () {
                   if (bloc.presentation != null) {
                     bloc.add(ChangePresentationEvent());

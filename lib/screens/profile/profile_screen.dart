@@ -130,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                           size: context.getHeight(multiply: 0.05),
                         ),
                         rating: '${state.profileModel.projects.length}',
-                        textTitle: language.isArabic ? 'المشاريع' : 'Projects',
+                        textTitle: language.isArabic ? 'المشاريع' : 'Project',
                       ),
                       CustomeStatusProfile(
                         textTitle: language.isArabic ? 'التقييم' : 'Rating',

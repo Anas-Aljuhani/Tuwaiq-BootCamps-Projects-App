@@ -8,13 +8,14 @@ class CustomButton extends StatelessWidget {
   bool? arabic = false;
   final Function() onPressed;
   final Color? color;
+  final double? fontSize;
   CustomButton({
     super.key,
     required this.englishTitle,
     this.arabic,
     required this.arabicTitle,
     required this.onPressed,
-    this.color,
+    this.color, this.fontSize,
   });
 
   @override
@@ -28,8 +29,8 @@ class CustomButton extends StatelessWidget {
           backgroundColor: color ?? const Color(0xff4D2EB4)),
       child: Text(
         arabic! || language.isArabic ? arabicTitle : englishTitle,
-        style: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        style:  TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize:fontSize ?? 20),
       ),
     );
   }
