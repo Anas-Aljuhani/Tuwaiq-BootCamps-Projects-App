@@ -127,6 +127,7 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 ![alt text](assets/readme/info.png)
 ![alt text](assets/readme/rate.png)
 
+
 ### Demo Video
 
 ![Demo video](assets/readme/vedio.mp4)
