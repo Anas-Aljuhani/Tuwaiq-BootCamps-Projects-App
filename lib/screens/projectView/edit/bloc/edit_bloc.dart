@@ -140,6 +140,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
         presentationAsList = fileAsList.toList();
 
         emit(SucsessState(msg: 'File upload susessfully'));
+        emit(ProjectImagesState(presentationFile: presentation));
       } catch (e) {
         emit(ErrorState(msg: '$e'));
       }
@@ -194,6 +195,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       emit(LoadingState());
       final res = await api.chnagePresentation(
           presentationFile: presentationAsList!, projectId: projectId);
+
       emit(SucsessState(msg: 'Presentation change susessfully'));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));

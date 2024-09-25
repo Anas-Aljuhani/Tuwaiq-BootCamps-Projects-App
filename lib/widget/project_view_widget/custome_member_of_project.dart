@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/helper/method/open_url.dart';
 import 'package:tuwaiq_project/models/members_project_model.dart';
-
 
 class CustomeMemberContainer extends StatelessWidget {
   const CustomeMemberContainer({
@@ -16,6 +16,7 @@ class CustomeMemberContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: context.getWidth(multiply: 0.03)),
       width: context.getWidth(multiply: 0.4),
       height: context.getHeight(multiply: 0.38),
       decoration: BoxDecoration(
@@ -33,7 +34,7 @@ class CustomeMemberContainer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: context.getHeight(multiply: 0.2),
+            height: context.getHeight(multiply: 0.17),
             width: context.getWidth(multiply: 0.2),
             decoration: const BoxDecoration(
                 color: Color(0xffCACACA), shape: BoxShape.circle),
@@ -73,28 +74,40 @@ class CustomeMemberContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: onPressedIcon,
+                  onPressed: () async {
+                    await openUrl(
+                        context: context, url: membersProject.link.bindlink);
+                  },
                   icon: const FaIcon(
                     FontAwesomeIcons.discord,
                     color: Colors.black,
                   ),
                 ),
                 IconButton(
-                  onPressed: onPressedIcon,
+                  onPressed: () async {
+                    await openUrl(
+                        context: context, url: membersProject.link.linkedin);
+                  },
                   icon: const FaIcon(
                     FontAwesomeIcons.linkedinIn,
                     color: Colors.black,
                   ),
                 ),
                 IconButton(
-                  onPressed: onPressedIcon,
+                  onPressed: () async {
+                    await openUrl(
+                        context: context, url: membersProject.link.bindlink);
+                  },
                   icon: const FaIcon(
                     FontAwesomeIcons.whatsapp,
                     color: Colors.black,
                   ),
                 ),
                 IconButton(
-                  onPressed: onPressedIcon,
+                  onPressed: () async {
+                    await openUrl(
+                        context: context, url: membersProject.link.bindlink);
+                  },
                   icon: const FaIcon(
                     FontAwesomeIcons.googleDrive,
                     color: Colors.black,

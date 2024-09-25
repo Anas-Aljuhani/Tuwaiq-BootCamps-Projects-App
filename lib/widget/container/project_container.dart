@@ -59,7 +59,9 @@ class ProjectContainer extends StatelessWidget {
                 Text(
                   projectsModel.projectName == null
                       ? "no name"
-                      : '${projectsModel.projectName?.substring(0, projectsModel.projectName!.length > 8 ? 8 : projectsModel.projectName?.length)}...',
+                      : projectsModel.projectName!.length < 11
+                          ? projectsModel.projectName!
+                          : '${projectsModel.projectName?.substring(0, 8)}...',
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
