@@ -24,7 +24,8 @@ class CustomeListTileProfile extends StatelessWidget {
           height: context.getHeight(multiply: 0.08),
           width: context.getWidth(multiply: 0.08),
           decoration: const BoxDecoration(
-              color: Color(0xffCACACA), shape: BoxShape.circle),
+              color: Color.fromARGB(255, 243, 241, 241),
+              shape: BoxShape.circle),
           child: Center(child: iconListTile)),
       title: Text(
         text,

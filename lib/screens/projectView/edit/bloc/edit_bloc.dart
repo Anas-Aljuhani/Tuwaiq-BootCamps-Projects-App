@@ -22,19 +22,16 @@ class EditBloc extends Bloc<EditEvent, EditState> {
   List<File>? projectImages;
   File? presentation;
   List<int>? presentationAsList;
-
+  String startDate = '';
+  String endDate = '';
+  String presentationDate = '';
   //====base controller========
   TextEditingController projectNameController =
       TextEditingController(text: 'test');
   TextEditingController bootcampNameController =
       TextEditingController(text: 'Flutter Bootcamp');
   TextEditingController typeController = TextEditingController(text: 'app');
-  TextEditingController startDateController =
-      TextEditingController(text: '01/01/2024');
-  TextEditingController endDateController =
-      TextEditingController(text: '31/12/2024');
-  TextEditingController presentationDateController =
-      TextEditingController(text: '30/09/2024');
+
   TextEditingController projectDescriptionController = TextEditingController(
       text: 'This is a sample project description for testing purposes.');
   //==========================
@@ -75,7 +72,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     on<ChangeStatusEvent>((event, emit) async {
       try {
         final res = await api.changeProjectState(
-            timeEndEdit: endDateController.text.trim(),
+            timeEndEdit: endDate.trim(),
             allowEdit: isEdit,
             allowRating: allowRating,
             allowPublic: isPublic,
@@ -143,6 +140,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
         presentationAsList = fileAsList.toList();
 
         emit(SucsessState(msg: 'File upload susessfully'));
+        emit(ProjectImagesState(presentationFile: presentation));
       } catch (e) {
         emit(ErrorState(msg: '$e'));
       }
@@ -197,6 +195,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       emit(LoadingState());
       final res = await api.chnagePresentation(
           presentationFile: presentationAsList!, projectId: projectId);
+
       emit(SucsessState(msg: 'Presentation change susessfully'));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));
@@ -213,10 +212,11 @@ class EditBloc extends Bloc<EditEvent, EditState> {
           projectName: projectNameController.text.trim(),
           bootcampName: bootcampNameController.text.trim(),
           type: typeController.text.trim(),
-          startDate: startDateController.text.trim(),
-          endDate: endDateController.text.trim(),
-          presentationDate: presentationDateController.text.trim(),
+          startDate: startDate,
+          endDate: endDate,
+          presentationDate: presentationDate,
           projectDescription: projectDescriptionController.text.trim());
+
       emit(SucsessState(msg: 'Base change susesfully'));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));

@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/models/projects_model.dart';
@@ -46,57 +48,73 @@ class ProjectViewScreen extends StatelessWidget {
                       context.getHeight(multiply: 0.1)),
                   painter: AuthShape(),
                 ),
-                CustomeActionProject(
-                  isAuthraize:
-                      projectsModel.userId == id || projectsModel.adminId == id,
-                  editClick: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditScreen(
-                            projectId: projectsModel.projectId!,
-                            isAuthraize: projectsModel.adminId == id,
-                          ),
-                        )).then(
-                      (value) async {
-                        if (value == true) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomeScreen(),
-                              ));
-                        }
-                      },
-                    );
-                  },
-                  qrCodeButton: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => Center(
-                        child: Container(
-                          width: context.getWidth(multiply: 0.8),
-                          height: context.getHeight(multiply: 0.4),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Column(
-                            children: [
-                              Text(language.isArabic
-                                  ? 'تقيم المشروع'
-                                  : 'Rate me'),
-                              QrImageView(
-                                backgroundColor: Colors.white,
-                                data: projectsModel.projectId!,
-                                padding: EdgeInsets.zero,
-                                version: QrVersions.auto,
-                                size: context.getHeight(multiply: 0.3),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        onPressed: () async {
+                          await Clipboard.setData(ClipboardData(
+                              text: projectsModel.projectId ?? ''));
+
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text('Project ID Copied to clipboard'),
+                            backgroundColor: Color(0xff7822d2),
+                          ));
+                        },
+                        icon: const Icon(FontAwesome.copy)),
+                    CustomeActionProject(
+                      isAuthraize: projectsModel.userId == id ||
+                          projectsModel.adminId == id,
+                      editClick: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditScreen(
+                                projectId: projectsModel.projectId!,
+                                isAuthraize: projectsModel.adminId == id,
                               ),
-                            ],
+                            )).then(
+                          (value) async {
+                            if (value == true) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomeScreen(),
+                                  ));
+                            }
+                          },
+                        );
+                      },
+                      qrCodeButton: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Center(
+                            child: Container(
+                              width: context.getWidth(multiply: 0.8),
+                              height: context.getHeight(multiply: 0.4),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Column(
+                                children: [
+                                  Text(language.isArabic
+                                      ? 'تقيم المشروع'
+                                      : 'Rate me'),
+                                  QrImageView(
+                                    backgroundColor: Colors.white,
+                                    data: projectsModel.projectId!,
+                                    padding: EdgeInsets.zero,
+                                    version: QrVersions.auto,
+                                    size: context.getHeight(multiply: 0.3),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
+                        );
+                      },
+                    ),
+                  ],
                 ),
                 Container(
                   height: context.getHeight(multiply: 0.2),
@@ -147,7 +165,8 @@ class ProjectViewScreen extends StatelessWidget {
                           language.isArabic ? 'بداية المشروع' : 'Start Date',
                       continaerColor: const Color(0xff00FF19).withOpacity(0.30),
                       borderColor: const Color(0xff00FF19).withOpacity(0.30),
-                      textContent: projectsModel.startDate ?? "not giveing",
+                      textContent: projectsModel.startDate?.substring(0, 7) ??
+                          "not giveing",
                       heightContainer: context.getHeight(multiply: 0.043),
                       widthContainer: context.getWidth(multiply: 0.25),
                       sizeText: 16,
@@ -157,7 +176,8 @@ class ProjectViewScreen extends StatelessWidget {
                           language.isArabic ? 'نهاية المشروع' : 'End Date',
                       continaerColor: const Color(0xffFF0000).withOpacity(0.30),
                       borderColor: const Color(0xffFF0000).withOpacity(0.30),
-                      textContent: projectsModel.endDate ?? "not giveing",
+                      textContent: projectsModel.endDate?.substring(0, 7) ??
+                          "not giveing",
                       heightContainer: context.getHeight(multiply: 0.043),
                       widthContainer: context.getWidth(multiply: 0.25),
                       sizeText: 16,

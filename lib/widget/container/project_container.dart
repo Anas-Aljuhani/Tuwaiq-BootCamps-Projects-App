@@ -17,8 +17,9 @@ class ProjectContainer extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding:
-            EdgeInsets.symmetric(horizontal: context.getWidth(multiply: 0.01)),
+        padding: EdgeInsets.symmetric(
+            horizontal: context.getWidth(multiply: 0.01),
+            vertical: context.getHeight(multiply: 0.005)),
         decoration: BoxDecoration(
             boxShadow: kElevationToShadow[4],
             color: Colors.white,
@@ -27,32 +28,40 @@ class ProjectContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             projectsModel.logoUrl != null && projectsModel.logoUrl!.isNotEmpty
-                ? Image.network(
-                    projectsModel.logoUrl!,
-                    height: context.getHeight(multiply: 0.2),
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        "assets/image/flutter.png",
-                      );
-                    },
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
+                ? Center(
+                    child: Image.network(
+                      projectsModel.logoUrl!,
+                      height: context.getHeight(multiply: 0.2),
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          "assets/image/qr_logo.png",
+                        );
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
 
-                      return const Center(
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    },
-                    fit: BoxFit.cover,
+                        return const Center(
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      },
+                      fit: BoxFit.cover,
+                    ),
                   )
-                : Image.asset("assets/image/flutter.png"),
+                : Expanded(
+                    child: Image.asset(
+                    "assets/image/qr_logo.png",
+                    fit: BoxFit.fitHeight,
+                  )),
             Row(
               children: [
                 Text(
                   projectsModel.projectName == null
                       ? "no name"
-                      : '${projectsModel.projectName?.substring(0, projectsModel.projectName!.length > 8 ? 8 : projectsModel.projectName?.length)}...',
+                      : projectsModel.projectName!.length < 11
+                          ? projectsModel.projectName!
+                          : '${projectsModel.projectName?.substring(0, 8)}...',
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
@@ -74,7 +83,7 @@ class ProjectContainer extends StatelessWidget {
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: Color(0x55000000)),
-            )
+            ),
           ],
         ),
       ),
