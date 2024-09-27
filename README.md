@@ -32,7 +32,7 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
   
 - **Update Project**: The TeamLead can only update all his Project.
 
-- **Edit Logo, Base, and assets/readme/Images...**: Team Leads can edit the project’s logo, base, and assets/readme/images and more.
+- **Edit Logo, Base, and more**: Team Leads can edit the project’s logo, base, and more.
 
 
 ## Widgets & External Packages
@@ -61,7 +61,7 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 - **Font Awesome Flutter**: A package to use Font Awesome icons in Flutter apps.
 
-- **assets/readme/image_picker**: A tool for picking assets/readme/images from the gallery or camera.
+- **image_picker**: A tool for picking images from the gallery or camera.
 
 - **url_launcher**: A Flutter plugin for launching a URL.
 
@@ -69,15 +69,13 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 - **file_picker**: Helps in picking files from the user's device.
 
-- **assets/readme/image**: The Dart assets/readme/Image Library provides the ability to load, save, and manipulate assets/readme/images in a variety of assets/readme/image file formats.
-
 - **smooth_page_indicator**:Customizable animated page indicator with a set of built-in effects.
 
 - **carousel_slider**:A carousel slider widget, support infinite scroll and custom child widget.
 
 - **flutter_rating_bar**:A simple yet fully customizable ratingbar for flutter which also include a rating bar indicator, supporting any fraction of rating.
 
-- **cached_network_assets/readme/image**:Flutter library to load and cache network assets/readme/images. Can also be used with placeholder and error widgets.
+- **cached_network**:Flutter library to load and cache network images. Can also be used with placeholder and error widgets.
 
 - **qr_flutter**:QR.Flutter is a Flutter library for simple and fast QR code rendering via a Widget or custom painter.
 
@@ -142,7 +140,7 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 ### Team Lead Capabilities
 
-- **Edit Logo, Base, and assets/readme/Images..**: Team Leads can now edit the project’s logo, base, and assets/readme/images.
+- **Edit Logo, Base, and more**: Team Leads can now edit the project’s logo, base, and more.
 
 #### Rating Features:
 
