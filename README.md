@@ -1,4 +1,4 @@
-# Tuwaiq Projects BootCamp App
+# Tuwaiq BootCamps Projects App
 
 ![alt text](assets/readme/FigmaDesign.png)
 ## Overview
